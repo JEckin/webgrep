@@ -22,7 +22,8 @@ do
 	rm temp.html
 
 	while read p; do
-		wget "$p"
+		echo "Get: $p"
+		wget -q "$p" && echo "Finished: $p"
 	done < temp.txt
 	mkdir $t
 	echo "$a" > $t/info.txt

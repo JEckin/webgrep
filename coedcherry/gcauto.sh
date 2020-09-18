@@ -1,5 +1,6 @@
 #!/bin/bash
-#use: ./grepcoedlist.sh file.txt
+#use: ./gcauto
+#Use it as a service
 ####################
 while [ 1 ]
 do

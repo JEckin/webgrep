@@ -1,5 +1,7 @@
 #!/bin/bash
-
+#use: ./grepcoed.sh
+#and then post the link https://www.coedcherry.com/models/eva-elfie/pics/eva-elfie-sunny-stairs
+##################
 t=0;
 wait="true"
 while [[ $wait == "true" ]]
@@ -22,7 +24,8 @@ do
 	rm temp.html
 
 	while read p; do
-		wget "$p"
+		echo "Get: $p"
+		wget -q "$p" && echo "Finished: $p"
 	done < temp.txt
 	mkdir $t
 	echo "$a" > $t/info.txt
