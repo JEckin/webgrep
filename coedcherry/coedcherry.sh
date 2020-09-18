@@ -27,9 +27,10 @@ else
 sort=$2
 fi
 
-site=1
+#site=1
 
-while [[ ! $site > $1 ]]
+for (( site=1; site<=$1;site++))
+#while [[ ! $site > $1 ]]
 do
 	clear
 	mkdir $tx
@@ -59,7 +60,7 @@ do
 		cd ..
 	done < tempx.txt
 	rm tempx.txt
-	site=$(($site+1))
+	#site=$(($site+1))
 done
 cd ..
 rdfind -deleteduplicates true . || apt install rdfind & rdfind -deleteduplicates true .

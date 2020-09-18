@@ -19,6 +19,8 @@ do
 	clear
 	echo "Folder: $t"
 	read a
+	mkdir $t
+	cd $t
 	wget -qO- $a > temp.html
 	cat temp.html | grep "jpg" | awk '{print $2'} | sed 's/href="//g' | sed 's/"//g' > temp.txt
 	rm temp.html
@@ -27,10 +29,9 @@ do
 		echo "Get: $p"
 		wget -q "$p" && echo "Finished: $p"
 	done < temp.txt
-	mkdir $t
-	echo "$a" > $t/info.txt
-	mv *.jpg $t
+	echo "$a" > info.txt
 	rm temp.txt
+	cd ..
 	t=$(($t+1))
 	#remove empty folder
 	rmdir *
