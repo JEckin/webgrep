@@ -2,25 +2,16 @@
 #use: ./grepcoed.sh
 #and then post the link https://www.coedcherry.com/models/eva-elfie/pics/eva-elfie-sunny-stairs
 ##################
-t=0;
-wait="true"
-while [[ $wait == "true" ]]
-do
-	if [[ -d $t ]]
-	then
-		t=$(($t+1))
-	else
-		wait="false"
-	fi
-done
-
 while [ 1 ]
 do
 	clear
-	echo "Folder: $t"
+	echo "Link: "
 	read a
-	mkdir $t
-	cd $t
+	clear
+        f=$(echo $a | rev | cut -d "/" -f 1 | rev)
+	echo "Folder: $f"
+	mkdir $f
+	cd $f
 	wget -qO- $a > temp.html
 	cat temp.html | grep "jpg" | awk '{print $2'} | sed 's/href="//g' | sed 's/"//g' > temp.txt
 	rm temp.html
@@ -32,19 +23,6 @@ do
 	echo "$a" > info.txt
 	rm temp.txt
 	cd ..
-	t=$(($t+1))
 	#remove empty folder
 	rmdir *
-	#If folder does exist
-	wait="true"
-	while [[ $wait == "true" ]]
-	do
-		if [[ -d $t ]]
-		then
-			t=$(($t+1))
-		else
-			wait="false"
-		fi
-	done
-
 done

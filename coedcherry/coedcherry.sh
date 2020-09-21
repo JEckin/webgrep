@@ -38,14 +38,14 @@ do
 	wget -qO- "https://www.coedcherry.com/galleries?sort=$sort&page=$site" > tempx.html
 	cat tempx.html | grep "pics" | grep -v "random" | awk '{print $3'} | sed 's/href="//g' | sed 's/"//g' > tempx.txt
 	rm tempx.html
-	t=0;
 
 	while read x
 	do
 		clear
-		echo "Folder: $tx/$t"
-		mkdir $t
-		cd $t
+	        f=$(echo $x | rev | cut -d "/" -f 1 | rev)
+		echo "Folder: $tx/$f"
+		mkdir $f
+		cd $f
 		wget -qO- $x > temp.html
 		cat temp.html | grep "jpg" | awk '{print $2'} | sed 's/href="//g' | sed 's/"//g' > temp.txt
 		rm temp.html
@@ -56,7 +56,6 @@ do
 		done < temp.txt
 		echo "$x" > info.txt
 		rm temp.txt
-		t=$(($t+1))
 		cd ..
 	done < tempx.txt
 	rm tempx.txt

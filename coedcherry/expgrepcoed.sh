@@ -29,9 +29,10 @@ do
 	while read x
 	do
 		clear
-		echo "Folder: $tx/$t"
-		mkdir $t
-		cd $t
+		echo "Folder: $tx/$f"
+	        f=$(echo $x | rev | cut -d "/" -f 1 | rev)
+		mkdir $f
+		cd $f
 		wget -qO- $x > temp.html
 		cat temp.html | grep "jpg" | awk '{print $2'} | sed 's/href="//g' | sed 's/"//g' > temp.txt
 		rm temp.html
